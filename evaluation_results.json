@@ -1,0 +1,42 @@
+[
+  {
+    "question": "What does JPMorgan say about operational risk?",
+    "expected_source": "JPMorgan",
+    "top_retrieved": "JPMorgan",
+    "top_source_correct": true,
+    "expected_in_top5": true,
+    "answer_cites_source": true
+  },
+  {
+    "question": "How does Bank of America manage credit concentrations?",
+    "expected_source": "Bank of America",
+    "top_retrieved": "Bank of America",
+    "top_source_correct": true,
+    "expected_in_top5": true,
+    "answer_cites_source": true
+  },
+  {
+    "question": "What are JPMorgan's main liquidity risks?",
+    "expected_source": "JPMorgan",
+    "top_retrieved": "JPMorgan",
+    "top_source_correct": true,
+    "expected_in_top5": true,
+    "answer_cites_source": true
+  },
+  {
+    "question": "How does Bank of America measure derivative credit exposure?",
+    "expected_source": "Bank of America",
+    "top_retrieved": "JPMorgan",
+    "top_source_correct": false,
+    "expected_in_top5": true,
+    "answer_cites_source": true
+  },
+  {
+    "question": "What capital requirements does JPMorgan discuss?",
+    "expected_source": "JPMorgan",
+    "top_retrieved": "JPMorgan",
+    "top_source_correct": true,
+    "expected_in_top5": true,
+    "answer_cites_source": true
+  }
+]
