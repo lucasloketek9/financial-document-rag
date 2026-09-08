@@ -10,17 +10,17 @@ Ask plain-English questions about the annual reports (10-Ks) of JPMorgan Chase, 
 
 > **Q:** How do these banks describe their approach to credit risk?
 >
-> **A:** *(A synthesized, side-by-side answer citing JPMorgan and Bank of America's actual risk-management language — credit risk definitions, concentration limits, mitigation tools like syndications and credit derivatives, etc.)*
+> **A:** *(A synthesized, side-by-side answer citing JPMorgan and Bank of America's actual risk-management language - credit risk definitions, concentration limits, mitigation tools like syndications and credit derivatives, etc.)*
 
 ## Architecture
 
 The pipeline has five stages:
 
-1. **Document ingestion** — `download_filings.py` programmatically pulls the latest 10-K for each bank directly from the SEC EDGAR system using company CIK identifiers.
-2. **Text extraction & chunking** — HTML filings are stripped to clean text and split into ~500-word overlapping chunks.
-3. **Embedding** — each chunk is embedded into a vector using a local `sentence-transformers` model (`all-MiniLM-L6-v2`).
-4. **Retrieval** — an incoming question is embedded and matched against all chunks via cosine similarity; the top-k most relevant chunks are retrieved.
-5. **Generation** — the retrieved chunks and question are passed to a GPT model deployed on Azure AI Foundry, which produces an answer grounded strictly in the retrieved context, with source citations.
+1. **Document ingestion** - `download_filings.py` programmatically pulls the latest 10-K for each bank directly from the SEC EDGAR system using company CIK identifiers.
+2. **Text extraction & chunking** - HTML filings are stripped to clean text and split into ~500-word overlapping chunks.
+3. **Embedding** - each chunk is embedded into a vector using a local `sentence-transformers` model (`all-MiniLM-L6-v2`).
+4. **Retrieval** - an incoming question is embedded and matched against all chunks via cosine similarity; the top-k most relevant chunks are retrieved.
+5. **Generation** - the retrieved chunks and question are passed to a GPT model deployed on Azure AI Foundry, which produces an answer grounded strictly in the retrieved context, with source citations.
 
 ### Design decision: hybrid embedding + generation
 
@@ -36,7 +36,7 @@ Unlike a basic RAG demo, this project includes an evaluation framework (`evaluat
 | Top-1 retrieval accuracy | 80% |
 | Answers citing the expected source (grounding) | 100% |
 
-**Finding:** The one top-1 retrieval miss occurred on a question about derivative credit exposure, where JPMorgan and Bank of America use closely similar language — the retriever surfaced a semantically near-identical JPMorgan chunk. This illustrates a real RAG challenge: distinguishing between highly similar passages across different source documents.
+**Finding:** The one top-1 retrieval miss occurred on a question about derivative credit exposure, where JPMorgan and Bank of America use closely similar language - the retriever surfaced a semantically near-identical JPMorgan chunk. This illustrates a real RAG challenge: distinguishing between highly similar passages across different source documents.
 
 ## Tech stack
 
